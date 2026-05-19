@@ -29,6 +29,7 @@ pub struct HttpProvider {
 }
 
 impl HttpProvider {
+    #[must_use]
     pub fn new(url: impl ToString) -> Self {
         Self {
             url: url.to_string(),
@@ -37,7 +38,7 @@ impl HttpProvider {
             headers: Vec::new(),
         }
     }
-
+    #[must_use]
     pub fn new_with_timeout(url: impl ToString, timeout: u32) -> Self {
         Self {
             url: url.to_string(),

@@ -48,6 +48,7 @@ impl WasmClient {
     /// Construct a client.
     ///
     /// - `url` — the JSON-RPC HTTP endpoint (e.g. `https://api.mainnet-beta.solana.com`).
+    #[must_use = "client must be used to make requests"]
     pub fn new(url: impl ToString) -> Self {
         let provider = HttpProvider::new(url);
         Self { provider }
@@ -92,6 +93,7 @@ impl WasmPubsubClient {
     ///
     /// - `url` — the JSON-RPC PubSub WebSocket endpoint
     ///   (e.g. `wss://api.mainnet-beta.solana.com`).
+    #[must_use = "connection result must be handled"]
     pub fn connect(
         url: impl ToString,
     ) -> Result<Self, Box<solana_rpc_client_types::request::RpcError>> {

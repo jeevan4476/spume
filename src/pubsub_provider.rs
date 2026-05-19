@@ -51,6 +51,7 @@ impl PubsubProvider {
     ///
     /// - `url` — the JSON-RPC PubSub WebSocket endpoint
     ///   (e.g. `wss://api.mainnet-beta.solana.com`).
+    #[must_use = "pubsub connection result must be handled"]
     pub fn connect(url: impl ToString) -> Result<Self, Box<RpcError>> {
         let url = url.to_string();
         let ws = WebSocket::open(&url)
@@ -225,6 +226,7 @@ impl<T> Subscription<T> {
     }
 
     /// Cancel the subscription and await the server's acknowledgement.
+    #[must_use = "unsubscription result must be handled to ensure server acknowledged"]
     pub async fn unsubscribe(mut self) -> Result<bool, Box<RpcError>> {
         self.unsubscribed = true;
         self.inner.subscriptions.borrow_mut().remove(&self.id);
