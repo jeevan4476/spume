@@ -4,6 +4,17 @@ fmt:
 clippy:
 	cargo clippy --all-features --all-targets
 
+bench *args:
+	cargo bench --bench transport {{args}}
+
+bench-filter filter:
+	cargo bench --bench transport -- {{filter}}
+
+bench-save filter:
+	cargo bench --bench transport -- {{filter}} --save-baseline before
+bench-compare filter:
+	cargo bench --bench transport -- {{filter}} --baseline before
+
 # Run wasm integration tests against a fresh surfpool instance.
 # Requires: surfpool, wasm-bindgen-test-runner, Node.
 test:
